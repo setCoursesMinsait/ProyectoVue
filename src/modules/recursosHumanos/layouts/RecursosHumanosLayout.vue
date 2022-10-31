@@ -15,7 +15,7 @@
                     <button id="id-agregarRH" onclick="muestraDatos(this)"><span>Agregar Candidato</span></button>
                 </div>
                 <div>
-                    <button id="salir"><span>Cerrar Sesion</span> <i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+                    <button id="salir" @click="salir"><span>Cerrar Sesion</span> <i class="fa-solid fa-arrow-right-from-bracket"></i></button>
                 </div>
             </div>
         </div>
@@ -36,6 +36,11 @@ export default {
   components: {
     Header: defineAsyncComponent(() => import('@/components/Encabezado.vue')),
     Search: defineAsyncComponent(() => import('@/components/Barra-Busqueda.vue'))
+  },
+  methods: {
+    salir(){
+      this.$router.push('/')
+    }
   }
 }
 </script>

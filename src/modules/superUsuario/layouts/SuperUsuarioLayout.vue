@@ -1,63 +1,64 @@
 <template>
-  <header>
-      <div class="logo espacio"></div>
-      <div class="iconos">
-        <div class="notificacion espacio-der"></div>
-        <div class="hamburguesa ocultar"></div>
-      </div>
-    </header>
-    <main>
-      <div class="nav" id="id-nav">
-        <div class="options-nav" >
-          <div class="cabeza-nav">
-            <div class="person-circle"></div>
-            <p class="Bienvenida" id="id-bienvenida"></p>
-            <p class="rol">Administrador</p>
-          </div>
-        </div>
-        <div class="botones">
-          <div>
-            <ul class="menu-opciones">
-              <li class="menu1"><div class="menu-admin"><div class="icono-admin"></div><span class="texto-admin">ADMIN</span></div>
-                <ul>
-                  <li><button id="id-dashboard" class="opcion-menu" onclick="muestraDatos(this)"><div class="icono-dashboard"></div><span>Dashboard</span></button></li>
-                  <li><button id="id-graficos" class="opcion-menu" onclick="muestraDatos(this)"><div class="icono-grafico"></div><span>Gráficos</span></button></li>
-                </ul>
-              </li>
-              <li class="menu1"><div class="menu-admin"><div class="icono-admin"></div><span class="texto-admin">RH</span></div>
-                <ul>
-                  <li><button id="id-candidatos" class="opcion-menu" onclick="muestraDatos(this)"><div class="icono-dashboard"></div><span>Candidatos</span></button></li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <button id="salir" class="cerrar-sesion" onclick="muestraDatos(this)"><span>Cerrar Sesion</span> <i class="fa-solid fa-arrow-right-from-bracket"></i></button>
-          </div>
+  <Header/>
+  <main>
+    <div class="nav" id="id-nav">
+      <div class="options-nav" >
+        <div class="cabeza-nav">
+          <img src="@/assets/person_circle.png" alt="">
+          <p class="Bienvenida" id="id-bienvenida"></p>
+          <p class="rol">Administrador</p>
         </div>
       </div>
-      <section id="id-contenido">
-        <div class="" id="id-titulo">
-          <div style="text-align:center;"><h1>Vista General</h1></div>
-          <div class="titulo">
-            <h2>Candidatos</h2>
-            <div class="buscar">
-              <div class="icono-lupa"></div>
-              <input type="text" onchange="filtraDatos(this)" id="id-buscar" placeholder="Buscar candidato...">
-            </div>
-          </div>
+      <div class="botones">
+        <div>
+          <ul class="menu-opciones">
+            <li class="menu1"><div class="menu-admin"><div class="icono-admin"></div><span class="texto-admin">ADMIN</span></div>
+              <ul>
+                <li><button id="id-dashboard" class="opcion-menu" onclick="muestraDatos(this)"><div class="icono-dashboard"></div><span>Dashboard</span></button></li>
+                <li><button id="id-graficos" class="opcion-menu" onclick="muestraDatos(this)"><div class="icono-grafico"></div><span>Gráficos</span></button></li>
+              </ul>
+            </li>
+            <li class="menu1"><div class="menu-admin"><div class="icono-admin"></div><span class="texto-admin">RH</span></div>
+              <ul>
+                <li><button id="id-candidatos" class="opcion-menu" onclick="muestraDatos(this)"><div class="icono-dashboard"></div><span>Candidatos</span></button></li>
+              </ul>
+            </li>
+          </ul>
         </div>
-        <div class="tabla" id="id-tabla"></div>
-      </section>
-      <div class="" id="id-cortina"></div>
-      <div>
+        <div>
+          <button id="salir" class="cerrar-sesion" @click="salir"><span>Cerrar Sesion</span> <i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+        </div>
       </div>
-    </main>
+    </div>
+    <section id="id-contenido">
+      <div class="" id="id-titulo">
+        <div style="text-align:center;"><h1>Vista General</h1></div>
+        <div class="titulo">
+          <h2>Candidatos</h2> 
+          <Search/>
+        </div>
+      </div>
+      <div class="tabla" id="id-tabla"></div>
+    </section>
+    <div class="" id="id-cortina"></div>
+    <div>
+    </div>
+  </main>
 </template>
 
 <script>
-export default {
+import { defineAsyncComponent } from '@vue/runtime-core'
 
+export default {
+  components: {
+    Header: defineAsyncComponent(() => import('@/components/Encabezado.vue')),
+    Search: defineAsyncComponent(() => import('@/components/Barra-Busqueda.vue'))
+  },
+  methods: {
+    salir(){
+      this.$router.push('/')
+    }
+  }
 }
 </script>
 
@@ -69,19 +70,8 @@ export default {
     font-size: 18px;
     background-color: #fff;
   }
-  header{
-    background: #006ec1;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 85px;
-    width: auto;
-  }
   .espacio{
     margin-left: 40px;
-  }
-  .ocultar{
-    display: none;
   }
   .espacio-der{
     margin-right: 10px;
@@ -210,12 +200,9 @@ export default {
   }
   .nav{
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     background: #2C93E0;
-    width: 15em;
     height: 100%;
-    float: left;
-    margin-left: -.5%;
     color: white;
   }
   .cabeza-nav{
@@ -241,7 +228,6 @@ export default {
     justify-content: space-between;
     display: flex;
     flex-direction: column;
-    height: 100%;
   }
   .cerrar-sesion{
     background-color: #278CD9;
